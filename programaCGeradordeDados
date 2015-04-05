@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+typedef struct Lugar{
+    char nomeLugar;
+    int numVisitas;
+    }lugar;
+    
+    typedef struct Pessoa{
+    lugar local[99];
+}pessoa;
+
+int main()
+{int i,j;
+i=1; j=1;
+   pessoa pe[10];
+      
+      pe[i].local[j].nomeLugar = 's';
+      pe[i].local[j].numVisitas = 10;
+      
+   printf("%c %d\n",pe[i].local[j].nomeLugar,pe[i].local[j].numVisitas);
+    return 0;
+}
+
