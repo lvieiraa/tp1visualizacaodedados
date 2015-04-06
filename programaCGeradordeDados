@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 
 typedef struct localidade{
@@ -17,12 +15,12 @@ int main()
     pe.local[j].numVisita = 0;
     }
     char i; char letra = 'b';
-    //for(i='a',j=1 ;i<='z';i++,j++)
+    for(i='a',j=1 ;i<='z';i++,j++)
     
-    /*if(i==letra){
-        
-                */ printf("%d\n",pe.local[2].numVisita);/*
-    }*/
+    if(i==letra){
+                  pe.local[j].numVisita ++;
+                 printf("%d\n",pe.local[2].numVisita);
+    }
     return 0;
 }
 
