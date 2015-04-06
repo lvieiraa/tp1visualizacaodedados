@@ -1,19 +1,28 @@
+
+
 #include <stdio.h>
 
+typedef struct localidade{
+    int numVisita;
+    }localidade;
 
-funcaoInserevisita(char letra, vetor pessoa)
+typedef struct Pessoa{
+        localidade local[26];
+    }pessoa;
 
-{ int j; char pessoa[26];
-    char i; 
-    for(i='a',j=1 ;i<='z';i++,j++)
-    if(i==letra){
-        
-        pessoa[j] = letra;
-         printf("%c %d\n",pessoa[j],j);
+int main()
+{ int j; pessoa pe;
+
+    for(j=0;j<=26;j++){
+    pe.local[j].numVisita = 0;
     }
+    char i; char letra = 'b';
+    //for(i='a',j=1 ;i<='z';i++,j++)
+    
+    /*if(i==letra){
+        
+                */ printf("%d\n",pe.local[2].numVisita);/*
+    }*/
     return 0;
 }
-
-
-
 
