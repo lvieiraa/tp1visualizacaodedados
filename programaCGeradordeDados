@@ -1,26 +1,104 @@
-#include <stdio.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+#include<ctype.h>
 
-typedef struct localidade{
-    int numVisita;
-    }localidade;
+typedef struct localidade
+{
+	float numVisita;
+}localidade;
 
-typedef struct Pessoa{
-        localidade local[26];
-    }pessoa;
+typedef struct Pessoa
+{
+	localidade local[30];
+}pessoa;
 
-int main()
-{ int j; pessoa pe;
+/*---------------------------------------------*/
 
-    for(j=0;j<=26;j++){
-    pe.local[j].numVisita = 0;
-    }
-    char i; char letra = 'b';
-    for(i='a',j=1 ;i<='z';i++,j++)
-    
-    if(i==letra){
-                  pe.local[j].numVisita ++;
-                 printf("%d\n",pe.local[2].numVisita);
-    }
-    return 0;
+//Funcao para ler o arquivo all.txt//
+void leitura()
+{  
+	FILE *entrada; 
+	entrada = fopen("all.txt","rb");
+
+	int numPessoa, numPessoa2, numGrafo, idLocal, k, j, numeroDeGrafos = 0; 
+	char aux2[10]; char aux3[10]; char i;  char tipoLocal; char str[10];
+	int denominador[11]; float proporcao;
+	
+	pessoa pe[11];
+	for(k=0;k<=11;k++){denominador[k]=0;}
+		for(k=1;k<=10;k++)
+		{
+	  		for(j=1;j<=25;j++)
+			{
+			pe[k].local[j].numVisita = 0;
+			}
+		}
+   
+
+		
+		
+
+while(numeroDeGrafos < 98)
+{     sprintf(str,"%d",numeroDeGrafos);
+      char auxnome[20]="saida";
+      strcat(auxnome,str);
+      strcat(auxnome,".txt");
+
+	FILE *saida;
+	saida = fopen(auxnome,"w");	
+	for(k=1;k<=10;k++)
+	{
+	  	for(j=1;j<=25;j++)
+		{
+		pe[k].local[j].numVisita = 0;
+		}
+	}
+	for(k=0;k<=11;k++){denominador[k]=0;}
+	fscanf(entrada,"%s    %d",aux2,&numGrafo);
+	fscanf(entrada,"%s %d %c %d",aux3,&numPessoa,&tipoLocal,&idLocal);
+    	numPessoa2=numPessoa;
+	while(*aux3!=*aux2)
+		{ 
+		numPessoa=numPessoa2;		
+              		do
+			{
+				for(i='A',j=1 ;i<='Z';i++,j++)
+				{
+    				if(i==tipoLocal){
+			pe[numPessoa].local[j].numVisita ++;
+                        denominador[numPessoa]++;
+     						}
+				}
+				fscanf(entrada,"%s %d %c %d",aux3,&numPessoa2,&tipoLocal,&idLocal);			
+			}
+			while(numPessoa2 == numPessoa);        	
+		}     	
+		int h[10];           
+		for(k=1;k<=10;k++){
+                h[k]=0;
+			for(j=1;j<=25;j++){
+			h[k] = pe[k].local[j].numVisita + pe[k].local[j].numVisita;
+                		if(h[k]>0)
+					{
+			proporcao =  pe[k].local[j].numVisita / denominador[k];                    
+			fprintf(saida,"%.2f,", proporcao);
+       					}
+ 				          }
+			/* if(h[k]>0){ */fprintf(saida,"\n");//}
+                                  }
+     		int r = 10;	
+     		fseek(entrada, -r, SEEK_CUR);
+                printf("%s %d ...ok!\n",aux2,numGrafo);
+		numeroDeGrafos++;
 }
 
+}
+	
+
+	int main()
+{
+	leitura();
+	return 0;
+}
