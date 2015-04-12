@@ -30,7 +30,7 @@ void leitura()
 	for(k=0;k<=11;k++){denominador[k]=0;}
 		for(k=1;k<=10;k++)
 		{
-	  		for(j=1;j<=25;j++)
+	  		for(j=1;j<=26;j++)
 			{
 			pe[k].local[j].numVisita = 0;
 			}
@@ -44,13 +44,13 @@ while(numeroDeGrafos < 98)
 {     sprintf(str,"%d",numeroDeGrafos);
       char auxnome[20]="saida";
       strcat(auxnome,str);
-      strcat(auxnome,".txt");
+      strcat(auxnome,".csv");
 
 	FILE *saida;
 	saida = fopen(auxnome,"w");	
 	for(k=1;k<=10;k++)
 	{
-	  	for(j=1;j<=25;j++)
+	  	for(j=1;j<=26;j++)
 		{
 		pe[k].local[j].numVisita = 0;
 		}
@@ -74,23 +74,37 @@ while(numeroDeGrafos < 98)
 				fscanf(entrada,"%s %d %c %d",aux3,&numPessoa2,&tipoLocal,&idLocal);			
 			}
 			while(numPessoa2 == numPessoa);        	
-		}     	
-		int h[10];           
+		}     
+	        char z;
+                for(z='A';z<='Z';z++){fprintf(saida,"%c,",z);}
+                fprintf(saida,"\n");
+		
+		int h[10];      
 		for(k=1;k<=10;k++){
-                h[k]=0;
-			for(j=1;j<=25;j++){
-			h[k] = pe[k].local[j].numVisita + pe[k].local[j].numVisita;
-                		if(h[k]>0)
-					{
-			proporcao =  pe[k].local[j].numVisita / denominador[k];                    
-			fprintf(saida,"%.2f,", proporcao);
-       					}
- 				          }
-			/* if(h[k]>0){ */fprintf(saida,"\n");//}
+                h[k]=0; 
+			for(j=1;j<=26;j++){
+			h[k] += pe[k].local[j].numVisita;
+				
+				          }
+				printf("%d---%d ",h[k],k);
+				printf("\n");
+				}
+    		
+		for(k=1;k<=10;k++){
+                            if(h[k]>0){
+			//fprintf(saida,"%d,",k); 
+			for(j=1;j<=26;j++){
+			proporcao =  pe[k].local[j].numVisita / denominador[k];   
+			               
+			fprintf(saida,"%.2f", proporcao);
+			if(j<26){fprintf(saida,",");}
+					  }
+  			fprintf(saida,"\n");
+       	 	                         }
                                   }
      		int r = 10;	
      		fseek(entrada, -r, SEEK_CUR);
-                printf("%s %d ...ok!\n",aux2,numGrafo);
+              //  printf("%s %d ...ok!\n",aux2,numGrafo);
 		numeroDeGrafos++;
 }
 
